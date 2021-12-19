@@ -1,4 +1,5 @@
 /*
+Autor:Weronika Rumiñska
 Temat: gra o zbieraniu
 Zakres: w tej grze planujê wykorzystaæ osie x i y do poruszania postaciami i animacjami
 oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
@@ -11,6 +12,7 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
+
 
 const int R = 30;
 const int W = 600;

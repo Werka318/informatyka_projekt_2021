@@ -1,6 +1,6 @@
 /*
 Autor:Weronika Rumiñska
-Temat: gra o zbieraniu
+Temat: gra o zbieraniu gggg
 Zakres: w tej grze planujê wykorzystaæ osie x i y do poruszania postaciami i animacjami
 oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 */

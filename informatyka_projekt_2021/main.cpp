@@ -4,6 +4,30 @@ Temat: gra o zbieraniu
 Zakres: w tej grze planujê wykorzystaæ osie x i y do poruszania postaciami i animacjami
 oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 */
+
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <conio.h>
+#include <windows.h>
+#include <cstdio>
+#include <time.h>
+#include <thread>
+#include <chrono>
+#include "Menu.h"
+
+class menu {
+
+};
+
 class kolo {
 public:
     void tworz();
@@ -84,6 +108,7 @@ int main()
     init();
     //shape.setPosition(W/2-R, H/2-R);
     //shape.setFillColor(sf::Color::Green);
+    Menu menu(window.getSize().x, (window.getSize().y);
 
     sf::Clock zegar;
     window.setFramerateLimit(60);
@@ -117,11 +142,45 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            switch (event.type)
+            {
+                //if (event.type == sf::Event::Closed)
+            case sf::Event::KeyReleased:
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Up:
+                    menu.MoveUp();
+                    break;
+
+                case sf::Keyboard::Down:
+                    menu.MoveDown();
+                    break;
+
+                case sf::Keyboard::Return:
+                    switch (menu.GetPressedItem())
+                    {
+                    case 0:
+                        std::cout << "Przycisk gry zostal wlaczony" << std::endl;
+                        break;
+                    case 1:
+                        std::cout << "Przycisk opcji zostal wlaczony" << std::endl;
+                        break;
+                    case 2:
+                        std::cout << "Przycisk opisu/graczy zostal wlaczony" << std::endl;
+                        break;
+                    }
+
+                    break;
+                }
+                break;
+            case sf::Event::Closed:
+                    window.close();
+            }
         }
 
         window.clear();
+
+        menu.draw(window);
         for (int i = 0; i < N; i++)
             window.draw(naszekolka[i]);
         window.display();

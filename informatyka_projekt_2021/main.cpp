@@ -4,14 +4,47 @@ Temat: gra o zbieraniu
 Zakres: w tej grze planujê wykorzystaæ osie x i y do poruszania postaciami i animacjami
 oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 */
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <time.h>
-#include <stdlib.h>
-#include <cstdlib>
-#include <cstdio>
-#include <ctime>
+class kolo {
+public:
+    void tworz();
+    void animuj();
+};
+
+void kolo::tworz() {
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Magenta);
+    sf::Clock zegar;
+    if (zegar + 10) {
+        draw
+    }
+}
+
+void kolo::animuj() {
+    srand(time(NULL));
+
+    shape.move(0, 4);
+    if (shape.getPosition().x > W) {
+        shape.setPosition(rand(), 0);
+    }
+}
+
+class gracz {
+public:
+    void tworz();
+    void animuj();
+};
+
+void gracz::tworz() {
+    sf::CircleShape shape(50.f);
+    shape.setFillColor(sf::Color::Green);
+
+}
+
+void gracz::animuj() {
+
+    keyboard;
+}
+
 
 
 const int R = 30;

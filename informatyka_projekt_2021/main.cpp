@@ -56,6 +56,7 @@ class gracz {
 public:
     void tworz();
     void animuj();
+    void rysuj();
 };
 
 void gracz::tworz() {

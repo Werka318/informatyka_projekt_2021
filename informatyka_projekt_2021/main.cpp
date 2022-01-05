@@ -23,6 +23,8 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include <thread>
 #include <chrono>
 #include "Menu.h"
+#include "Player.h"
+
 
 class menu {
 
@@ -140,6 +142,8 @@ int main()
 
             }
 
+        Player myPlayer("serce.png");
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -177,6 +181,18 @@ int main()
             case sf::Event::Closed:
                     window.close();
             }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                myPlayer.movePlayer('u', 6.0);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                myPlayer.movePlayer('d', 6.0);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                myPlayer.movePlayer('r', 6.0);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                myPlayer.movePlayer('l', 6.0);
+            }
         }
 
         window.clear();
@@ -184,6 +200,7 @@ int main()
         menu.draw(window);
         for (int i = 0; i < N; i++)
             window.draw(naszekolka[i]);
+        myPlayer.drawPlayer(window);
         window.display();
     }
     return 0;

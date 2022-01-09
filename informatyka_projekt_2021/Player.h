@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 class Player
@@ -18,6 +19,10 @@ public:
 		window.draw(pSprite);
 	}
 
+	void setPlayer(float x, float y) {
+		pSprite.setPosition(x, y);
+	}
+
 	void movePlayer(char direction, float moveSpeed) {
 		if (direction == 'w') {
 			pSprite.move(0, -moveSpeed);
@@ -26,7 +31,7 @@ public:
 			pSprite.move(0, moveSpeed);
 		}
 		else if (direction == 'd') {
-			pSprite.move(-moveSpeed, 0);
+			pSprite.move( moveSpeed, 0);
 		}
 		else if (direction == 'a') {
 			pSprite.move(-moveSpeed, 0);

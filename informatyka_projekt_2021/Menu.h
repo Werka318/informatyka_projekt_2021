@@ -1,5 +1,7 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include <iostream>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 #define MAX_NUMBER_OF_ITEMS 3
 
@@ -17,7 +19,7 @@ public:
 private:
 	int selectedItemIndex;
 	sf::Font font;
-	sf::Text text[MAX_NUMBER_OF_ITEMS];
+	sf::Text menu[MAX_NUMBER_OF_ITEMS];
 
 };
 

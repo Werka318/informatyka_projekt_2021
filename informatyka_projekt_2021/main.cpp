@@ -24,9 +24,36 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include <chrono>
 #include "Menu.h"
 #include "Player.h"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics/BlendMode.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/ConvexShape.hpp>
+#include <SFML/Graphics/Drawable.hpp>
+ #include <SFML/Graphics/Font.hpp>
+ #include <SFML/Graphics/Glyph.hpp>
+ #include <SFML/Graphics/Image.hpp>
+ #include <SFML/Graphics/PrimitiveType.hpp>
+ #include <SFML/Graphics/Rect.hpp>
+ #include <SFML/Graphics/RectangleShape.hpp>
+ #include <SFML/Graphics/RenderStates.hpp>
+ #include <SFML/Graphics/RenderTarget.hpp>
+ #include <SFML/Graphics/RenderTexture.hpp>
+ #include <SFML/Graphics/RenderWindow.hpp>
+ #include <SFML/Graphics/Shader.hpp>
+ #include <SFML/Graphics/Shape.hpp>
+ #include <SFML/Graphics/Sprite.hpp>
+ #include <SFML/Graphics/Text.hpp>
+ #include <SFML/Graphics/Texture.hpp>
+ #include <SFML/Graphics/Transform.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/Vertex.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/VertexBuffer.hpp>
+#include <SFML/Graphics/View.hpp>
 
 
-class menu {
+/*class menu {
 
 };
 
@@ -70,13 +97,15 @@ void gracz::tworz() {
 void gracz::animuj() {
 
     keyboard;
-}
+}*/
 
 
 
-const int R = 30;
+
 const int W = 600;
 const int H = 600;
+
+/*
 const int N = 10;
 sf::CircleShape naszekolka[N];
 
@@ -103,29 +132,32 @@ void przesun(float PX, float PY, sf::CircleShape& obiektdoprzes)
             init();
         }
     }
-}
+}*/
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(W, H), "SFML works!");
     //sf::CircleShape shape(R);
-    init();
+    //init();
     //shape.setPosition(W/2-R, H/2-R);
     //shape.setFillColor(sf::Color::Green);
-    Menu menu(window.getSize().x, (window.getSize().y);
+    Menu menu(window.getSize().x, (window.getSize().y));
+    window.getSize().x == W;
+    window.getSize().y == H;
 
     sf::Clock zegar;
-    window.setFramerateLimit(60);
+    //window.setFramerateLimit(60);
     while (window.isOpen())
     {
         sf::Time czas = zegar.restart();
-        std::cout << (1.0 / czas.asSeconds()) << " FPS " << std::endl;
+        //std::cout << (1.0 / czas.asSeconds()) << " FPS " << std::endl;
 
-        for (int i = 0; i < N; i++)
-            przesun(4.1, 0, naszekolka[i]);
+       // for (int i = 0; i < N; i++)
+       //     przesun(4.1, 0, naszekolka[i]);
 
 
         // spr myszy
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        /*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             for (int i = 0; i < N; i++)
             {
                 int px = naszekolka[i].getPosition().x + R / 2;
@@ -140,10 +172,10 @@ int main()
                 //else
                 //    std::cout << "nie trafiles" << std::endl;
 
-            }
+            }*/
 
         Player myPlayer("serce.png");
-
+        //myPlayer.setPlayer(20, 30);
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -178,29 +210,33 @@ int main()
                     break;
                 }
                 break;
+
             case sf::Event::Closed:
                     window.close();
             }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                myPlayer.movePlayer('u', 6.0);
+                myPlayer.movePlayer('w', 6.0);
             }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                myPlayer.movePlayer('d', 6.0);
+                myPlayer.movePlayer('s', 6.0);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                myPlayer.movePlayer('r', 6.0);
+                myPlayer.movePlayer('d', 6.0);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                myPlayer.movePlayer('l', 6.0);
+                myPlayer.movePlayer('a', 6.0);
             }
         }
 
         window.clear();
 
-        menu.draw(window);
-        for (int i = 0; i < N; i++)
-            window.draw(naszekolka[i]);
+        //menu.draw(window);
+        //for (int i = 0; i < N; i++)
+        //   window.draw(naszekolka[i]);
         myPlayer.drawPlayer(window);
+
         window.display();
     }
     return 0;

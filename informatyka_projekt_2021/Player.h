@@ -23,6 +23,16 @@ public:
 		pSprite.setPosition(x, y);
 	}
 
+	sf::Vector2f Pos() { return pSprite.getPosition(); }
+
+	void xPlayer() {
+		pSprite.getPosition().x;
+	}
+
+	void yPlayer() {
+		pSprite.getPosition().y;
+	}
+
 	void movePlayer(char direction, float moveSpeed) {
 		if (direction == 'w') {
 			pSprite.move(0, -moveSpeed);
@@ -37,9 +47,13 @@ public:
 			pSprite.move(-moveSpeed, 0);
 		}
 }
+	void update() {
+		pSprite.setPosition(position);
+	}
 private:
 	sf::Texture pTexture;
 	sf::Sprite pSprite;
+	sf::Vector2f position;
 
 };
 

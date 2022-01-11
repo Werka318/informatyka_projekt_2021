@@ -5,15 +5,15 @@
 
 
 
-Menu::Menu(float width, float height)
+/*Menu::init(float width, float height)
 {
 	/*if (!font.loadFromFile("arial.ttf"))
 	{
 		//obs³uga b³êdu
 
 	}*/
-	!font.loadFromFile("arial.ttf");
-	menu[0].setFont(font);
+	//font.loadFromFile("arial.ttf");
+	/*menu[0].setFont(font);
 	menu[0].setFillColor(sf::Color::Magenta);
 	menu[0].setString("Gra");
 	menu[0].setPosition(sf::Vector2f(width / 2, (MAX_NUMBER_OF_ITEMS + 1) * 10));
@@ -28,16 +28,21 @@ Menu::Menu(float width, float height)
 	menu[2].setString("Opis/gracze");
 	menu[2].setPosition(sf::Vector2f(width / 2, (MAX_NUMBER_OF_ITEMS + 1) * 30));
 
-	selectedItemIndex = 0;
+	//selectedItemIndex = 0;
 
 }
 
-Menu::~Menu()
+Menu::Menu() {
+	init();
+	Font();
+	MAX();
+}
+/*Menu::Menuuu()
 {
 
-}
+}*/
 
-void Menu::draw(sf::RenderWindow& window) 
+/*void Menu::draw(sf::RenderWindow& window) 
 {
 	for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
 	{
@@ -64,3 +69,7 @@ void Menu::MoveDown()
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 	}
 }
+
+void Menu::Font() {
+	!font.loadFromFile("arial.ttf");
+}*/

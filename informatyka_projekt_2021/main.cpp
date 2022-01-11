@@ -51,6 +51,9 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/VertexBuffer.hpp>
 #include <SFML/Graphics/View.hpp>
+#include "Obiekt.h"
+#include "sstream"
+#include "cstdlib"
 
 
 /*class menu {
@@ -141,15 +144,28 @@ int main()
     //init();
     //shape.setPosition(W/2-R, H/2-R);
     //shape.setFillColor(sf::Color::Green);
-    Menu menu(window.getSize().x, (window.getSize().y));
+    //Menu menu(window.getSize().x, (window.getSize().y));
+    Player myPlayer("serce.png");
+    srand(time(0));
+    Obiekt myObiekt(rand() % W+1 /2, rand() % H+1 /2);
+    sf::Text tekst;
+    sf::Font font;
+    font.loadFromFile("arial.ttf");
+    tekst.setFont(font);
+    tekst.setCharacterSize(50);
+    tekst.setFillColor(sf::Color::White);
+    //Obiekt myObiekt(rand() % W, rand() % H);
+    //Obiekt myObiekt2(rand() % W, rand() % H);
+    //myPlayer.setPlayer(W / 2, H / 2);
+    int scores = 0;
     window.getSize().x == W;
     window.getSize().y == H;
 
     sf::Clock zegar;
-    //window.setFramerateLimit(60);
+    window.setFramerateLimit(60);
     while (window.isOpen())
     {
-        sf::Time czas = zegar.restart();
+        //sf::Time czas = zegar.restart();
         //std::cout << (1.0 / czas.asSeconds()) << " FPS " << std::endl;
 
        // for (int i = 0; i < N; i++)
@@ -174,15 +190,19 @@ int main()
 
             }*/
 
-        Player myPlayer("serce.png");
+        //Player myPlayer("serce.png");
         //myPlayer.setPlayer(20, 30);
         sf::Event event;
         while (window.pollEvent(event))
         {
-            switch (event.type)
-            {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+            //switch (event.type)
+            //{
                 //if (event.type == sf::Event::Closed)
-            case sf::Event::KeyReleased:
+            /*case sf::Event::KeyReleased:
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Up:
@@ -209,26 +229,46 @@ int main()
 
                     break;
                 }
-                break;
+                break;*/
 
-            case sf::Event::Closed:
-                    window.close();
+            //case sf::Event::Closed:
+            //        window.close();
+            //}
+            //sf::Vector2f pos = myPlayer.setPlayer();
+            
+            if (myObiekt.Pos().y <= 0 || myObiekt.Pos().y>=600) {
+                myObiekt.bounceUD();
             }
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            if (myObiekt.Pos().x <= 0 || myObiekt.Pos().x >= 600) {
+                myObiekt.bounceS();
+            }
+
+           if ((myPlayer.Pos().x==myObiekt.Pos().x) && (myPlayer.Pos().y == myObiekt.Pos().y)) {
+              scores++;
+           }
+
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && myPlayer.Pos().y >= -50 ) {
                 myPlayer.movePlayer('w', 6.0);
             }
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && myPlayer.Pos().y <= H-50 ) {
                 myPlayer.movePlayer('s', 6.0);
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && myPlayer.Pos().x <= W-50 ) {
                 myPlayer.movePlayer('d', 6.0);
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && myPlayer.Pos().x >=-50 ) {
                 myPlayer.movePlayer('a', 6.0);
             }
-        }
+
+            myPlayer.update();
+            myObiekt.update();
+            std::stringstream ss;
+            ss << "scores:" << scores ;
+            tekst.setString(ss.str());
+
+        
 
         window.clear();
 
@@ -236,7 +276,10 @@ int main()
         //for (int i = 0; i < N; i++)
         //   window.draw(naszekolka[i]);
         myPlayer.drawPlayer(window);
-
+        window.draw(myObiekt.getShape());
+        window.draw(tekst);
+        //myObiekt.drawObiekt(window);
+        //myObiekt2.drawObiekt(window);
         window.display();
     }
     return 0;

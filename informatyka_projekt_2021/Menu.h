@@ -8,8 +8,8 @@
 class Menu
 {
 public:
-	Menu(float width, float height);
-	~Menu();
+	Menu();
+	//Menuuu();
 
 	void draw(sf::RenderWindow& window);
 	void MoveUp();
@@ -20,6 +20,9 @@ private:
 	int selectedItemIndex;
 	sf::Font font;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
+	void init(float width, float height);
+	void Font();
+	void MAX();
 
 };
 

@@ -149,10 +149,6 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\dell\Documents\infa\SFML-2.5.1\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </AdditionalIncludeDirectories>
-    </ClCompile>
     <ClCompile Include="Obiekt.cpp" />
   </ItemGroup>
   <ItemGroup>

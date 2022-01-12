@@ -28,15 +28,17 @@ float Obiekt::getXV() {
 }
 
 void Obiekt::bounceS(){
-	xV = -xV;
 	srand(time(0));
+	xV = -xV;
 	oShape.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+	
 }
 
 void Obiekt::bounceUD() {
-	yV = -yV;
 	srand(time(0));
+	yV = -yV;
 	oShape.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+	
 }
 
 void Obiekt::update() {

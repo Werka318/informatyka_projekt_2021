@@ -54,6 +54,8 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include "Obiekt.h"
 #include "sstream"
 #include "cstdlib"
+#include <random>
+
 
 
 /*class menu {
@@ -140,6 +142,8 @@ void przesun(float PX, float PY, sf::CircleShape& obiektdoprzes)
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(W, H), "SFML works!");
+    int menu_selected_flag = -1;
+    Menu menu1;
     //sf::CircleShape shape(R);
     //init();
     //shape.setPosition(W/2-R, H/2-R);
@@ -262,7 +266,7 @@ int main()
                 myPlayer.movePlayer('a', 6.0);
             }
 
-            myPlayer.update();
+            //myPlayer.update();
             myObiekt.update();
             std::stringstream ss;
             ss << "scores:" << scores ;
@@ -270,14 +274,79 @@ int main()
 
         
 
-        window.clear();
+        //window.clear();
+            if (menu_selected_flag == -1)
+            {
+                menu1.draw(window);
+                menu_selected_flag = menu1.GetPressedItem(sf::Mouse::getPosition(window), sf::Mouse::isButtonPressed(sf::Mouse::Left));
+            }
+            if (menu_selected_flag == 0)
+            {
+                window.clear();
+                //sf::CircleShape kolo;
+                //kolo.setFillColor(sf::Color::White);
+                //kolo.setRadius(15);
+                //window.draw(kolo);
+                myPlayer.drawPlayer(window);
+                window.draw(myObiekt.getShape());
+                window.draw(tekst);
+                std::cout << "Dziala" << "\n";
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+                    menu_selected_flag = -1;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    window.close();
+                }
 
+
+            }
+            if (menu_selected_flag == 1)
+            {
+                window.clear();
+                sf::CircleShape kolo;
+                kolo.setFillColor(sf::Color::White);
+                kolo.setRadius(15);
+                window.draw(kolo);
+                myPlayer.drawPlayer(window);
+                window.draw(tekst);
+                std::cout << "Dziala" << "\n";
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+                    menu_selected_flag = -1;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    window.close();
+                }
+
+
+            }
+            if (menu_selected_flag == 2)
+            {
+                window.clear();
+                //sf::CircleShape kolo;
+                //kolo.setFillColor(sf::Color::White);
+                //kolo.setRadius(15);
+                //window.draw(kolo);
+                //myPlayer.drawPlayer(window);
+                //window.draw(myObiekt.getShape());
+                //window.draw(tekst);
+                std::cout << "Dziala" << "\n";
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+                    menu_selected_flag = -1;
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    window.close();
+                }
+
+
+            }
+            //.....tu siê pokazuje nr flagi
+            //std::cout << menu_selected_flag << "\n";
         //menu.draw(window);
         //for (int i = 0; i < N; i++)
         //   window.draw(naszekolka[i]);
-        myPlayer.drawPlayer(window);
-        window.draw(myObiekt.getShape());
-        window.draw(tekst);
+       // myPlayer.drawPlayer(window);
+       // window.draw(myObiekt.getShape());
+       // window.draw(tekst);
         //myObiekt.drawObiekt(window);
         //myObiekt2.drawObiekt(window);
         window.display();

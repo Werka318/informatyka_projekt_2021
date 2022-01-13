@@ -55,6 +55,7 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include "sstream"
 #include "cstdlib"
 #include <random>
+#include "Pilka.h"
 
 
 
@@ -152,6 +153,7 @@ int main()
     Player myPlayer("serce.png");
     srand(time(0));
     Obiekt myObiekt(rand() % W+1 /2, rand() % H+1 /2);
+    Pilka myPilka(rand() % W + 1 / 2, rand() % H + 1 / 2);
     sf::Text tekst;
     sf::Font font;
     font.loadFromFile("arial.ttf");
@@ -166,6 +168,7 @@ int main()
     window.getSize().y == H;
 
     sf::Clock zegar;
+    sf::Clock niesmiertelnosc;
     window.setFramerateLimit(60);
     while (window.isOpen())
     {
@@ -239,7 +242,37 @@ int main()
             //        window.close();
             //}
             //sf::Vector2f pos = myPlayer.setPlayer();
-            
+        if (myPilka.Pos().y <= 0 || myPilka.Pos().y >= 600) {
+            myPilka.bounceUD();
+        }
+
+        if (myPilka.Pos().x <= 0 || myPilka.Pos().x >= 600) {
+            myPilka.bounceS();
+        }
+        int distanceP = (myPlayer.Pos().x - myPilka.Pos().x) * (myPlayer.Pos().x - myPilka.Pos().x)+ (myPlayer.Pos().y - myPilka.Pos().y)*(myPlayer.Pos().y - myPilka.Pos().y);
+        if (distanceP<3500 && niesmiertelnosc.getElapsedTime().asMilliseconds()>1000) {
+            std::cout << scores;
+            niesmiertelnosc.restart();
+            scores--;
+        }
+
+        int distanceO = (myPlayer.Pos().x - myObiekt.Pos().x) * (myPlayer.Pos().x - myObiekt.Pos().x) + (myPlayer.Pos().y - myObiekt.Pos().y) * (myPlayer.Pos().y - myObiekt.Pos().y);
+        if (distanceO < 3500 && niesmiertelnosc.getElapsedTime().asMilliseconds()>1000) {
+            std::cout << scores;
+            niesmiertelnosc.restart();
+            scores--;
+        }
+          
+
+       /* if (myPlayer.spr(myPilka)) {
+            std::cout << scores;
+            scores--;
+        }*/
+
+        /*if ((myPlayer.Pos().x == myPilka.Pos().x) && (myPlayer.Pos().y == myPilka.Pos().y)) {
+            scores--;
+        }*/
+
             if (myObiekt.Pos().y <= 0 || myObiekt.Pos().y>=600) {
                 myObiekt.bounceUD();
             }
@@ -248,26 +281,28 @@ int main()
                 myObiekt.bounceS();
             }
 
-           if ((myPlayer.Pos().x==myObiekt.Pos().x) && (myPlayer.Pos().y == myObiekt.Pos().y)) {
-              scores++;
+           //if ((myPlayer.Pos().x==myObiekt.Pos().x) && (myPlayer.Pos().y == myObiekt.Pos().y)) {
+           //   scores--;
+           //}
+
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && myPlayer.Pos().y >= -50) {
+               myPlayer.movePlayer('w', 6.0);
            }
 
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && myPlayer.Pos().y >= -50 ) {
-                myPlayer.movePlayer('w', 6.0);
-            }
-
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && myPlayer.Pos().y <= H-50 ) {
-                myPlayer.movePlayer('s', 6.0);
-            }
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && myPlayer.Pos().x <= W-50 ) {
-                myPlayer.movePlayer('d', 6.0);
-            }
-           if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && myPlayer.Pos().x >=-50 ) {
-                myPlayer.movePlayer('a', 6.0);
-            }
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && myPlayer.Pos().y <= H - 50) {
+               myPlayer.movePlayer('s', 6.0);
+           }
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && myPlayer.Pos().x <= W - 50) {
+               myPlayer.movePlayer('d', 6.0);
+           }
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && myPlayer.Pos().x >= -50) {
+               myPlayer.movePlayer('a', 6.0);
+           }
+           
 
             //myPlayer.update();
             myObiekt.update();
+            myPilka.update();
             std::stringstream ss;
             ss << "scores:" << scores ;
             tekst.setString(ss.str());
@@ -290,12 +325,25 @@ int main()
                 myPlayer.drawPlayer(window);
                 window.draw(myObiekt.getShape());
                 window.draw(tekst);
-                std::cout << "Dziala" << "\n";
+                //std::cout << "Dziala" << "\n";
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
                     menu_selected_flag = -1;
                 }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                    window.close();
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+                    font.loadFromFile("arial.ttf");
+                    sf::Text wyjscie;
+                    sf::Font font;
+                    wyjscie.setFont(font);
+                    wyjscie.setCharacterSize(30);
+                    wyjscie.setFillColor(sf::Color::White);
+                    wyjscie.setPosition(W / 3, H / 3);
+                    std::stringstream ss;
+                    ss << "Czy na pewno?:";
+                    wyjscie.setString(ss.str());
+                    window.draw(wyjscie);
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                        window.close();
+                    }
                 }
 
 
@@ -303,11 +351,8 @@ int main()
             if (menu_selected_flag == 1)
             {
                 window.clear();
-                sf::CircleShape kolo;
-                kolo.setFillColor(sf::Color::White);
-                kolo.setRadius(15);
-                window.draw(kolo);
                 myPlayer.drawPlayer(window);
+                window.draw(myPilka.getShape());
                 window.draw(tekst);
                 std::cout << "Dziala" << "\n";
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
@@ -334,6 +379,7 @@ int main()
                     menu_selected_flag = -1;
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+
                     window.close();
                 }
 

@@ -1,4 +1,6 @@
 #pragma once
+#include "Pilka.h"
+#include "Obiekt.h"
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -18,6 +20,16 @@ public:
 	void drawPlayer(sf::RenderWindow& window) {
 		window.draw(pSprite);
 	}
+	
+	bool spr(Pilka &p) {
+		auto r = pSprite.getGlobalBounds();
+		return pSprite.getGlobalBounds().intersects(p.obrys());
+	}
+
+	/*bool sprO(Obiekt &o) {
+		auto r = pSprite.getGlobalBounds();
+		return pSprite.getGlobalBounds().intersects(o.obrysO());
+	}*/
 
 	void setPlayer(float x, float y) {
 		pSprite.setPosition(x, y);

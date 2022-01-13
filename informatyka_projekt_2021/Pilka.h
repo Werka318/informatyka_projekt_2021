@@ -1,15 +1,15 @@
 #pragma once
-#include "Player.h"
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-class Obiekt {
+
+class Pilka {
 public:
-	Obiekt() {
+	Pilka() {
 		//domyœlny
 	}
-	Obiekt(float startX, float startY);
+	Pilka(float startX, float startY);
 
 	/*void drawObiekt(sf::RenderWindow& window) {
 		window.draw(pSprite);
@@ -36,24 +36,24 @@ public:
 		}
 	}*/
 	//sf::FloatRect getPosition();
-	sf::Vector2f Pos() { return oShape.getPosition(); }
+	sf::Vector2f Pos() { return pShape.getPosition(); }
 	sf::RectangleShape getShape();
 	float getXV();
 	void bounceUD();
 	void bounceS();
 	void update();
 
-	/*sf::FloatRect obrysO() {
-		auto r = oShape.getGlobalBounds();
+	sf::FloatRect obrys() {
+		auto r = pShape.getGlobalBounds();
 		return r;
-	}*/
+	}
 
 
 private:
-	sf::RectangleShape oShape;
+	sf::RectangleShape pShape;
 	sf::Vector2f position;
-	float xV=2.f;
-	float yV=2.f;
+	float xV = 3.f;
+	float yV = 0.5f;
 };
 
 /*Obiekt::Obiekt(float x, float y) {
@@ -63,4 +63,5 @@ private:
 	pSprite.setFillColor(sf::Color::Magenta);
 	pSprite.setPosition(position);
 }*/
+
 

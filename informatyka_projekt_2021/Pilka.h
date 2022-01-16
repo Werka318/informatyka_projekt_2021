@@ -52,8 +52,8 @@ public:
 private:
 	sf::RectangleShape pShape;
 	sf::Vector2f position;
-	float xV = 3.f;
-	float yV = 0.5f;
+	float xV = 10.f;
+	float yV = 1.f;
 };
 
 /*Obiekt::Obiekt(float x, float y) {

@@ -64,12 +64,27 @@ oraz elementy animowane w celu zbierania np. jedzenia lub kolorowych kulek
 #include "fstream"
 
 typedef struct {
-    //unsigned int indeks;//indeks sprite
-    int pkt;//polozenie x
-    //float y;//polozenie y
-    //bool aktywny;//aktywny?
+    int pkt;
 }sc;
 
+void save(sc sc) {
+    FILE* fp;
+    fp = fopen("data.dat", "wb");
+    fwrite(&sc, sizeof(sc), 1, fp);
+    fclose(fp);
+}
+sc load() {
+    sc sc;
+    FILE* fp;
+    fp = fopen("data.dat", "rb");
+    fread(&sc, sizeof(sc), 1, fp);
+    fclose(fp);
+    return sc;
+}
+
+//typedef struct {
+//    char text[10];
+//}napis;
 /*class menu {
 
 };
@@ -153,17 +168,25 @@ void przesun(float PX, float PY, sf::CircleShape& obiektdoprzes)
     }
 }*/
 
+
+
+
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(W, H), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(W, H), "Gierka");
     int menu_selected_flag = -1;
     Menu menu1;
     Tlo tlo();
+    //napis napis1;
+    //napis1.text[0] = "x";
     //sf::CircleShape shape(R);
     //init();
     //shape.setPosition(W/2-R, H/2-R);
     //shape.setFillColor(sf::Color::Green);
     //Menu menu(window.getSize().x, (window.getSize().y));
+    sc punkty;
+    sc punkty2;
     Player myPlayer("serce.png");
     srand(time(0));
     Obiekt myObiekt(rand() % W+1 /2, rand() % H+1 /2);
@@ -178,6 +201,7 @@ int main()
     tekst.setFont(font);
     tekst.setCharacterSize(50);
     tekst.setFillColor(sf::Color::White);
+    
     //tekst2.setFont(font);
     //tekst2.setCharacterSize(50);
     //tekst2.setFillColor(sf::Color::White);
@@ -350,6 +374,8 @@ int main()
             std::stringstream ss;
             ss << "scores:" << scores ;
             tekst.setString(ss.str());
+
+            
             //std::stringstream ss2;
             //ss1 << "scores:" << scores2;
             //tekst2.setString(ss2.str());
@@ -367,7 +393,6 @@ int main()
             if (menu_selected_flag == 0)
             {
                 window.clear();
-                
                 //sf::CircleShape kolo;
                 //kolo.setFillColor(sf::Color::White);
                 //kolo.setRadius(15);
@@ -406,20 +431,12 @@ int main()
                     help.drawHelp(window);
                 }
                 if (event.key.code == sf::Keyboard::Z) {
-                    FILE* plik;
-                    plik = fopen("2.dat", "wb");
-                    fwrite(&scores, sizeof(sc), 1, plik);
-                    fclose(plik);
-                    fclose(plik);
-
+                    punkty.pkt = scores;
+                    save(punkty);
                 }
                 if (event.key.code == sf::Keyboard::O) {
-                    FILE* plik;
-                    plik = fopen("2.dat", "rb");
-                    fread(&scores, sizeof(sc), 1, plik);
-                    fclose(plik);
-                    return scores;
-                    scores = scores;
+                    punkty = load();
+                    scores = punkty.pkt;
 
                 }
 
@@ -427,7 +444,6 @@ int main()
             if (menu_selected_flag == 1)
             {
                 window.clear();
-
                 myPlayer.drawPlayer(window);
                 window.draw(myPilka.getShape());
                 window.draw(tekst);
@@ -460,20 +476,12 @@ int main()
 
                 }
                 if (event.key.code == sf::Keyboard::Z) {
-                    FILE* plik;
-                    plik = fopen("1.dat", "wb");
-                    fwrite(&scores, sizeof(sc), 1,plik);
-                    fclose(plik);
-                    fclose(plik);
-
+                    punkty2.pkt = scores;
+                    save(punkty2);
                 }
                 if (event.key.code == sf::Keyboard::O) {
-                    FILE* plik;
-                    plik = fopen("1.dat", "rb");
-                    fread(&scores, sizeof(sc), 1, plik);
-                    fclose(plik);
-                    return scores;
-                    scores = scores;
+                    punkty2 = load();
+                    scores = punkty2.pkt;
 
                 }
                 

@@ -12,10 +12,7 @@ Pilka::Pilka(float startX, float startY) {
 	pShape.setPosition(position);
 }
 
-/*sf::FloatRect Obiekt::getPosition() {
-	return oShape.getGlobalBounds();
 
-}*/
 
 
 

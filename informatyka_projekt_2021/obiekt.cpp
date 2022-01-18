@@ -12,10 +12,7 @@ Obiekt::Obiekt(float startX, float startY){
 	oShape.setPosition(position);
 	}
 
-/*sf::FloatRect Obiekt::getPosition() {
-	return oShape.getGlobalBounds();
-	
-}*/
+
 
 
 

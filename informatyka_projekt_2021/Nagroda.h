@@ -8,16 +8,12 @@
 
 class Nagroda {
 public:
-	//Nagroda() {
-		//domyœlny
-	//}
-	//Nagroda(float startX, float startY);
+	
 
 	Nagroda(int Nt) {
 			std::mt19937 gen(random());
 			std::uniform_int_distribution<> distX(100, 500);
 			std::uniform_int_distribution<> distY(100, 500);
-			//sf::Vector2f Pos();
 			float x = 0;
 			float y = 0;
 			N = Nt;
@@ -58,12 +54,10 @@ public:
 
 private:
 	sf::RectangleShape *nShape;
-	//sf::Sprite* nT;
 	int N;
 	std::random_device random;
 	sf::Vector2f position;
-	//float xV = 1.f;
-	//float yV = 1.f;
+	
 };
 
 

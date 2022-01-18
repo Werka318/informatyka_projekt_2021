@@ -8,9 +8,7 @@
 class Player
 {
 public:
-	Player() {
-		//domyœlny
-	}
+	
 	Player(std::string imgDirectory) {
 		if (!pTexture.loadFromFile(imgDirectory)) {
 			std::cerr << "Spirte \n";
@@ -26,10 +24,7 @@ public:
 		return pSprite.getGlobalBounds().intersects(p.obrys());
 	}
 
-	/*bool sprO(Obiekt &o) {
-		auto r = pSprite.getGlobalBounds();
-		return pSprite.getGlobalBounds().intersects(o.obrysO());
-	}*/
+	
 
 	void setPlayer(float x, float y) {
 		pSprite.setPosition(x, y);
